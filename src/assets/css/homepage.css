@@ -1,0 +1,140 @@
+.home-content {
+    background-color: transparent;
+    margin:  0 auto;
+    max-width: 1300px;
+}
+.home-top {
+    display: flex;
+    /* 水平排列内容 */
+    justify-content: space-between;
+    /* 卡片和走马灯之间有间距 */
+    align-items: flex-start;
+    /* 垂直对齐顶部 */
+    gap: 10px;
+    /* 卡片与走马灯之间的间距 */
+}
+.home-infoshow {
+    padding: 10px;
+    display: flex;
+    /* 水平排列两个卡片 */
+    justify-content: space-between;
+    flex: 1;
+    /* 使得卡片区域占满剩余空间 */
+    /* 卡片之间的间距 */
+}
+.el-card {
+    flex: 1;
+    /* 每个卡片占据相等的空间 */
+     height: 400px;
+    /* 防止卡片变得过宽 */
+}
+.el-carousel {
+    padding: 10px;
+    margin: 0 0 auto 0;
+    overflow: hidden;
+    border-radius: 50px;
+}
+.el-carousel__item h3 {
+    color: #475669;
+    font-size: 18px;
+    opacity: 0.75;
+    line-height: 500px;
+    margin: 0;
+}
+.el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+}
+.el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+}
+/* 容器样式 */
+.booth-container {
+    padding: 20px 00px;
+  }
+  /* 网格布局 */
+  .booth-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
+  }
+  /* 卡片样式 */
+
+  .booth-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  /* 卡片顶部的标题区域 */
+  .card-header {
+    padding: 10px;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .booth-card {
+    width: 300px;
+    height: 300px;
+    margin: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .booth-image img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+  }
+
+  .booth-body {
+    padding: 20px;
+  }
+
+  .booth-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .booth-description {
+    font-size: 14px;
+    color: #555;
+    margin: 10px 0;
+  }
+
+  .booth-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+
+  .booth-price {
+    font-size: 16px;
+    color: #e74c3c;
+    font-weight: bold;
+  }
+
+  .booth-location {
+    font-size: 14px;
+    color: #777;
+  }
+
+  .booth-link {
+    display: inline-block;
+    font-size: 14px;
+    color: #3498DB;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .booth-link:hover {
+    text-decoration: underline;
+  }
+/* .home-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+} */

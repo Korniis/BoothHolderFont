@@ -1,0 +1,67 @@
+.header-content {
+    height: 60px;
+    background-color: #ffde7d;
+    border-radius: 10px;
+    box-shadow: var(--el-box-shadow-lighter);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* 让所有子元素垂直居中 */
+}
+.header-logo {
+    flex-shrink: 0;
+    /* 防止 Logo 被压缩 */
+}
+.header-menu {
+    display: flex;
+    align-items: center;
+    /* 让菜单垂直居中 */
+    margin-right: 10px;
+}
+.header-button {
+    display: flex;
+    justify-items: center;
+    align-self: center;
+}
+.header-avatar {
+    display: flex;
+    align-items: center;
+    margin: 0px 5px 0px 0px;
+}
+.header-content>div:nth-child(2) {
+    flex-grow: 1;
+    /* 中间的文字区域占据剩余空间 */
+    text-align: center;
+    /* 文本水平居中 */
+    font-size: 20px;
+    /* 你可以根据需求调整字体大小 */
+}
+.gradient-text {
+    align-self: center;
+    margin: auto;
+    left: 50%;
+    font-weight: bold;
+    background: linear-gradient(45deg, #ff6f61, #6a5acd, #32cd32, #00bcd4);
+    background-size: 400% 400%;
+    color: transparent;
+    background-clip: text;
+    /* 使背景渐变应用于文本 */
+    -webkit-background-clip: text;
+    /* 为了支持 Webkit 浏览器 */
+    animation: gradientAnimation 5s ease infinite;
+    /* 动态渐变效果 */
+    white-space: nowrap;  /* 防止文本换行 */
+  overflow: hidden;  /* 如果文本超出容器，隐藏多余的部分 */
+  text-overflow: ellipsis;  /* 超出部分用省略号表示 */
+}
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
