@@ -1,0 +1,35 @@
+.home-header {
+    padding: 0px;
+    /* background-color: ; */
+}
+.app-main {
+    height: 100vh; /* Full viewport height */
+   background-image:url(https://pic.616pic.com/bg_w1180/00/11/65/jp8NllcJlK.jpg!/fw/1120) ;
+   background-repeat: no-repeat;
+   background-size: cover;
+  }
+  @keyframes gradientBackground {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+/* .home-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+} */
+::-webkit-scrollbar {
+    width: 0;
+}
+.home-main {
+    padding: 10px;
+    height: calc(100vh - 60px);
+}
