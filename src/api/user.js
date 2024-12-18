@@ -1,28 +1,30 @@
 import request from "@/utils/request.js"
 
 export const userRegisterService = (registerData)=>{
-    const params = new URLSearchParams();
-    for(let key in registerData){
-        params.append(key,registerData[key]);
-    }
-    return request.post('/user/register',params);
+
+    return request.post('/user/register',registerData);
 }
+
+
 
 export const userLoginService = (registerData)=>{
 
     return request.post('/User/Login',registerData);
 }
 
+
+
+
+
+
 export const userInfoService = ()=>{
     return request.get('/user/userInfo')
 }
 
-export const updateUserService = (UserModel)=>{
-    const params = new URLSearchParams();
-    for(let key in UserModel){
-        params.append(key,UserModel[key]);
-    }
-    return request.put('/user/update',params)
+export const getCodeService = (email)=>{
+  const params = new URLSearchParams();
+      params.append("email",email)
+    return request.get('/user/SendRegisterCode',{params})
 }
 
 export const updateUserPicService = (pic)=>{

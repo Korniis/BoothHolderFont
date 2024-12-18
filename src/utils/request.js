@@ -38,6 +38,9 @@ instance.interceptors.response.use(
     },
     err=>{
         if(err.response.status===401){
+          const UserStore = useUserStore();
+          if (UserStore.userinfo.token) UserStore.clearUserInfo();
+
             ElMessage.error('请先登录');
             router.push('/login');
         }else{
