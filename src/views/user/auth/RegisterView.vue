@@ -77,10 +77,12 @@
   </div>
 </template>
 <script setup>
+import { ElMessage } from "element-plus";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import{getCodeService,userRegisterService} from '@/api/user'
 const isTime = ref(true);
-const currentTime = ref(10);
+const currentTime = ref(1);
 const getCode = async () => {
   console.log("开始发送验证码");
   isTime.value = false;
@@ -94,12 +96,12 @@ const getCode = async () => {
       isTime.value = !isTime.value;
     }
   }, 1000);
-  // try {
-  //   await getCodeService(email);
-  //   ElMessage.success("验证码发送成功");
-  // } catch (error) {
-  //   console.error("发送验证码时出现错误：", error);
-  // }
+  try {
+    await getCodeService(email);
+    ElMessage.success("验证码发送成功");
+  } catch (error) {
+    console.error("发送验证码时出现错误：", error);
+  }
 };
 const registerForm = ref({
   username:"",
@@ -139,13 +141,13 @@ const rules = {
 };
 const router = useRouter();
 const register = async () => {
-  // registerForm.value.email = registerForm.value.email.trim();
-  // registerForm.value.password = registerForm.value.password.trim();
-  // registerForm.value.code = registerForm.value.code.trim();
-  // const res = await registerService(registerForm.value);
-  // //ElMessage.success(res.message ? res.message : '注册成功!')
-  // ElMessage.success("注册成功!");
-  goToLogin;
+  registerForm.value.email = registerForm.value.email.trim();
+  registerForm.value.password = registerForm.value.password.trim();
+  registerForm.value.code = registerForm.value.code.trim();
+  const res = await userRegisterService(registerForm.value);
+  ElMessage.success(res.message ? res.message : '注册成功!')
+  ElMessage.success("注册成功!");
+  await goToLogin();
 };
 const goToLogin = () => {
   router.push("/login");

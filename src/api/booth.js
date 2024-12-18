@@ -9,3 +9,14 @@ export const BoothGetService = (queryParams)=>{
   }
     return request.get('/Booth/GetList',{params:params});
 }
+
+
+
+  export const boothDetailsService = (id)=>{
+    return request.get(`/Booth/get/${id}`)
+
+}
+export const TypeGetService = ()=>{
+  return request.get("BrandType/get")
+
+}

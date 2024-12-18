@@ -7,7 +7,12 @@
       </el-header>
       <el-main class="home-main">
         <router-view :key="componentKey"></router-view>
-        <footer>Footerhell'</footer>
+        <footer class="footer">
+    <div class="footer-content">
+        <p>&copy; 2024.EnBoWer All rights reserved.</p>
+
+    </div>
+</footer>
       </el-main>
     </el-container>
   </div>
@@ -24,4 +29,54 @@ onMounted(() => {
 </script>
 <style scoped>
 @import url(../../assets/css/mainapp.css);
+/* 基础样式 */
+.footer {
+    background-color: #282828;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+/* 内容区域 */
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 链接样式 */
+.footer a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.footer a:hover {
+    background-color: #555;
+}
+
+/* 导航列表样式 */
+.footer nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+    .footer-content {
+        padding: 10px;
+    }
+
+    .footer nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+}
+
 </style>

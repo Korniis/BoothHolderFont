@@ -19,9 +19,9 @@
           ></el-avatar>
         </div>
         <div class="header-button">
-          <el-button type="text">个人主页</el-button>
+          <el-button type="text"  @click="goToProfile">个人主页</el-button>
           <el-button type="text">活动时间</el-button>
-          <el-button type="text">商场摊位</el-button>
+          <el-button type="text"  @click="goToBooth">商场摊位</el-button>
           <el-button type="text">点我预约</el-button>
         </div>
       </div>
@@ -43,6 +43,13 @@ function goToLogin() {
 }
 function goToRegister() {
   router.push('/register');
+}
+
+function goToBooth() {
+  router.push('/booth');
+}
+function goToProfile() {
+  router.push('/user');
 }
 </script>
 <style>

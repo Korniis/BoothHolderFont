@@ -22,7 +22,7 @@
         :key="booth.id"
         class="booth-card"
         :style="{ borderColor: booth.themeColor || '#ddd' }"
-      >
+        @click="boothDetails(booth)">
     <!-- Card Image -->
     <div class="booth-image">
         <img :src="booth.photo || booth.mediaUrl" alt="booth.boothName" class="booth-photo" />
@@ -56,6 +56,7 @@ import { onMounted,  ref} from 'vue';
 import WebData from '@/components/WebData.vue';
 import UserData from '@/components/UserData.vue';
 import {BoothGetService} from '@/api/booth.js';
+import router from '@/router';
 
 
 //分页条数据模型
@@ -88,7 +89,10 @@ const onCurrentChange = (num) => {
     }
 
  }
-
+ const boothDetails = (item)=>{
+  router.push({path:'/booth/details',query:{
+    id:item.id,
+  }})}
 const imageUrls = ref([
   'https://www.jimei.cn/uploadimgfile/evaluation/fzc8HlRBZxNd.jpg',
   'https://pic.vjshi.com/2019-04-29/b09e5df032cfb9e5587501e4e68078b3/online/puzzle.jpg?x-oss-process=style/w1440_h2880',
