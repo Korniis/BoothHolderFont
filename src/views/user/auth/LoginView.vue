@@ -89,9 +89,7 @@ const login = async () => {
   ElMessage.success("登录成功!");
 router.push({
    path: '/home',
-   query: {
-     date: new Date().getTime(),
-   },
+
  })
 };
 const changeUrl = (url) => {
