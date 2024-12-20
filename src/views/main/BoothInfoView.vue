@@ -1,5 +1,5 @@
 <template>
-  <div v-if="booth" class="booth-container">
+  <div v-if="booth.id" class="booth-container">
     <div class="booth-header">
       <div>
       <h2>{{ booth.boothName }}</h2>
@@ -37,7 +37,7 @@
   </div>
 
   <div v-else>
-    <p>加载中...</p>
+    <p>没有找到</p>
   </div>
 </template>
 

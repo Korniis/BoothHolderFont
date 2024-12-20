@@ -22,7 +22,7 @@
           <el-button type="text"  @click="goToProfile">个人主页</el-button>
           <el-button type="text">活动时间</el-button>
           <el-button type="text"  @click="goToBooth">商场摊位</el-button>
-          <el-button type="text">点我预约</el-button>
+          <el-button type="text"  @click="goExit">退出</el-button>
         </div>
       </div>
       <div v-else>
@@ -33,7 +33,9 @@
   </div>
 </template>
 <script setup>
+import { userInfoService } from '@/api/user';
 import { useUserStore } from '@/stores/userstore';
+import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 const userstore = useUserStore();
 const router = useRouter();
@@ -51,6 +53,26 @@ function goToBooth() {
 function goToProfile() {
   router.push('/user');
 }
+function goExit(){
+
+  userstore.clearUserInfo();
+  router.push('/');
+}
+const  getuserinfo= async (token)=>{
+  if (userstore.userinfo.token) {
+  const res =   await  userInfoService(token);
+   console.log(res);
+   if (res && res.data) {
+        userstore.setUserInfo(res.data.username, res.data.useravatar);
+      }
+    }
+}
+onMounted(()=>{
+
+
+  getuserinfo(userstore.userinfo.token)
+
+})
 </script>
 <style>
 @import url(../assets/css/headerbar.css);

@@ -9,9 +9,16 @@ export const BoothGetService = (queryParams)=>{
   }
     return request.get('/Booth/GetList',{params:params});
 }
+export const BoothCreateService = (boothdata)=>{
+
+    return request.post('/booth/CreateBooth',boothdata);
+}
 
 
+export const BoothUpdateService = (boothdata)=>{
 
+  return request.post('/booth/updateBooth',boothdata);
+}
   export const boothDetailsService = (id)=>{
     return request.get(`/Booth/get/${id}`)
 
@@ -19,4 +26,11 @@ export const BoothGetService = (queryParams)=>{
 export const TypeGetService = ()=>{
   return request.get("BrandType/get")
 
+}
+export const delboothService = (id)=>{
+    const params = new URLSearchParams();
+
+        params.append('id',id);
+
+    return request.delete('/Booth/DeleteBooth',{params})
 }

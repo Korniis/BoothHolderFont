@@ -1,11 +1,12 @@
 import { reactive } from 'vue';
 import { defineStore } from 'pinia';
-
+import { jwtDecode } from 'jwt-decode'
 export const useUserStore = defineStore('userstore', () => {
   // 使用 reactive 创建响应式的 userinfo 对象
   const userinfo = reactive({
     username: '',   // 用户名
     useravatar: '', // 用户头像
+    userrole:[],
     token: localStorage.getItem('token') || '', // 从 localStorage 获取 token（如果有）
   });
 
@@ -13,6 +14,8 @@ export const useUserStore = defineStore('userstore', () => {
   const setUserInfo = (username, useravatar) => {
     userinfo.username = username;
     userinfo.useravatar = useravatar;
+   const decodeJwt = jwtDecode(userinfo.token);
+   userinfo.userrole =decodeJwt["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
   };
 
   // 设置 token

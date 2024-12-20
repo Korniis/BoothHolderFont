@@ -20,6 +20,9 @@ export const userLoginService = (registerData)=>{
 export const userInfoService = ()=>{
     return request.get('/user/userInfo')
 }
+export const userMoreInfoService = ()=>{
+  return request.get('/user/userMoreInfo')
+}
 
 export const getCodeService = (email)=>{
   const params = new URLSearchParams();
@@ -27,12 +30,13 @@ export const getCodeService = (email)=>{
     return request.get('/user/SendRegisterCode',{params})
 }
 
-export const updateUserPicService = (pic)=>{
-    const params = new URLSearchParams();
-    for(let key in pic){
-        params.append(key,pic[key]);
-    }
-    return request.patch('/user/updatePic',params)
+export const updateUserPicService = (avatarurl)=>{
+
+    return request.post('/user/setavatar',avatarurl)
+}
+export const updateUserInfoService = (from)=>{
+
+  return request.post('/user/UpdateUser',from)
 }
 
 export const updatePwdService = (repwd)=>{
@@ -44,9 +48,6 @@ export const updatePwdService = (repwd)=>{
 }
 
 export const delUserService = (id)=>{
-    const params = new URLSearchParams();
-    for(let key in id){
-        params.append(key,id[key]);
-    }
-    return request.delete('/user/del',params)
+
+    return request.delete('/user/del',id)
 }
