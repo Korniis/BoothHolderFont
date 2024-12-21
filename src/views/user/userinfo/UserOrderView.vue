@@ -79,6 +79,13 @@
         <el-table-column prop="location" label="位置" sortable></el-table-column>
         <el-table-column prop="dailyRate" label="每日租金" sortable :sort-method="sortMethod"></el-table-column>
         <el-table-column prop="availableDate" label="可用日期" sortable :sort-method="sortMethod"></el-table-column>
+
+        <el-table-column prop="tag" label="Tag" width="100" :filter-method="filterTag" filter-placement="bottom-end">
+          <template #default="scope">
+            <el-tag :type="scope.row.tag === isAvailable ? 'success' : 'primary'" disable-transitions>{{
+              scope.row.isAvailable ? '营业' : '未营业' }}</el-tag>
+          </template>
+        </el-table-column>
         <el-table-column label="操作">
           <template #default="{ row }">
             <el-button @click="editBooth(row)" size="small" type="primary">编辑</el-button>
@@ -98,39 +105,40 @@
   <!-- 编辑和新建摊位对话框 -->
   <el-dialog v-model="dialogVisible" append-to-body :title="dialogTitle">
     <el-form :model="currentBooth" ref="boothForm" label-width="120px" :rules="formRules">
-  <el-form-item label="摊位名称" prop="boothName">
-    <el-input v-model="currentBooth.boothName" placeholder="请输入摊位名称"></el-input>
-  </el-form-item>
-  <el-form-item label="位置" prop="location">
-    <el-input v-model="currentBooth.location" placeholder="请输入位置"></el-input>
-  </el-form-item>
-  <el-form-item label="品牌类型" prop="brandTypeid">
-    <el-select v-model="currentBooth.brandTypeid" placeholder="选择品牌类型" style="width: 100%">
-      <el-option v-for="type in types" :key="type.id" :label="type.brandTypeName" :value="type.id" />
-    </el-select>
-  </el-form-item>
-  <el-form-item label="每日租金" prop="dailyRate">
-    <el-input-number v-model="currentBooth.dailyRate" :min="0" placeholder="每日租金" style="width: 100%" />
-  </el-form-item>
-  <el-form-item label="可用日期" prop="availableDate">
-    <el-date-picker v-model="currentBooth.availableDate" type="date" placeholder="可用日期" style="width: 100%" />
-  </el-form-item>
-  <el-form-item label="上传图片">
-    <el-upload
-      class="avatar-uploader"
-      action="/api/Upload/UploadBoothImg"
-      :show-file-list="false"
-      :headers="headers"
-      :on-success="handleAvatarSuccess"
-      :before-upload="beforeAvatarUpload"
-    >
-      <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-      <el-icon v-else class="avatar-uploader-icon">
-        <Plus />
-      </el-icon>
-    </el-upload>
-  </el-form-item>
-</el-form>
+      <el-form-item label="摊位名称" prop="boothName">
+        <el-input v-model="currentBooth.boothName" placeholder="请输入摊位名称"></el-input>
+      </el-form-item>
+      <el-form-item label="位置" prop="location">
+        <el-input v-model="currentBooth.location" placeholder="请输入位置"></el-input>
+      </el-form-item>
+      <el-form-item label="品牌类型" prop="brandTypeId">
+        <el-select v-model="currentBooth.brandTypeId" placeholder="选择品牌类型" style="width: 100%">
+          <el-option v-for="type in types" :key="type.id" :label="type.brandTypeName" :value="type.id" />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="每日租金" prop="dailyRate">
+        <el-input-number v-model="currentBooth.dailyRate" :min="0" placeholder="每日租金" style="width: 100%" />
+      </el-form-item>
+      <el-form-item label="可用日期" prop="availableDate">
+        <el-date-picker v-model="currentBooth.availableDate" type="date" placeholder="可用日期" style="width: 100%" />
+      </el-form-item>
+
+      <el-form-item label="简介" prop="description">
+        <el-input v-model="currentBooth.description" placeholder="请输入位置"></el-input>
+      </el-form-item>
+      <el-form-item  label="是否营业" prop="isAvailable">
+        <el-switch v-model="currentBooth.isAvailable" />
+      </el-form-item>
+      <el-form-item label="上传图片">
+        <el-upload class="avatar-uploader" action="/api/Upload/UploadBoothImg" :show-file-list="false"
+          :headers="headers" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+          <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+          <el-icon v-else class="avatar-uploader-icon">
+            <Plus />
+          </el-icon>
+        </el-upload>
+      </el-form-item>
+    </el-form>
 
     <template #footer>
       <el-button @click="dialogVisible = false">取消</el-button>
@@ -172,14 +180,17 @@ const currentBooth = ref({
   id: null,
   boothName: '',
   location: '',
-  brandTypeid: '',
+  brandTypeId: '',
+  description: '',
+  isAvailable: '',
+  mediaUrl: '',
   dailyRate: null,
   availableDate: null,
 });
 const formRules = ref({
   boothName: [{ required: true, message: '摊位名称不能为空', trigger: 'blur' }],
   location: [{ required: true, message: '位置不能为空', trigger: 'blur' }],
-  brandTypeid: [{ required: true, message: '品牌类型不能为空', trigger: 'change' }],
+  brandTypeId: [{ required: true, message: '品牌类型不能为空', trigger: 'change' }],
   dailyRate: [{ required: true, message: '每日租金不能为空', trigger: 'blur' }],
   availableDate: [{ required: true, message: '可用日期不能为空', trigger: 'change' }],
 });
@@ -191,7 +202,7 @@ const handleAvatarSuccess = (response, uploadFile) => {
   imageUrl.value = URL.createObjectURL(uploadFile.raw)
   loadingInstance.value.close() // 关闭 loading 动画
 }
-const boothForm= ref({})
+const boothForm = ref({})
 
 const onSizeChange = (size) => {
   pageSize.value = size;
@@ -279,14 +290,16 @@ const beforeAvatarUpload = (rawFile) => {
 
 }
 const editBooth = (booth) => {
-  imgUp.value=currentBooth.value.mediaUrl
 
   dialogVisible.value = true;
   dialogTitle.value = '编辑摊位';
+
   currentBooth.value = { ...booth };
+  imageUrl.value = currentBooth.value.mediaUrl
+
 };
 
-const deleteBooth =  async(id) => {
+const deleteBooth = async (id) => {
   console.log(id)
   ElMessageBox.confirm(
     '此操作将永久删除该项，您确定要继续吗？',
@@ -316,7 +329,7 @@ const deleteBooth =  async(id) => {
       } catch (error) {
         ElMessage({
           type: 'error',
-          message: '删除过程中发生错误'+error,
+          message: '删除过程中发生错误' + error,
         });
       }
     })
@@ -331,8 +344,8 @@ const deleteBooth =  async(id) => {
 
 
 const saveBooth = async () => {
-    // Validate the form
-    const valid = await boothForm.value.validate();
+  // Validate the form
+  const valid = await boothForm.value.validate();
   if (!valid) {
     ElMessage.error('请填写完整表单');
     return;

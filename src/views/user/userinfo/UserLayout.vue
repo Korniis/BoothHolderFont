@@ -6,8 +6,8 @@
         <el-menu :default-active="activeMenu"  router class="side-menu" @seleuct="handleSelect">
           <el-menu-item index="/user/personal-info">个人信息</el-menu-item>
           <el-menu-item v-if="isAdmin" index="/user/mybooth" >我的摊位</el-menu-item>
-          <el-menu-item index="3" :route="{ path: 'message-center' }">消息中心</el-menu-item>
-          <el-menu-item index="4" :route="{ path: 'settings' }">设置</el-menu-item>
+          <el-menu-item index="/user/event" >活动中心</el-menu-item>
+          <el-menu-item index="/user/myevent" >我的活动</el-menu-item>
         </el-menu>
       </el-aside>
       <el-container>

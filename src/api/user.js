@@ -51,3 +51,10 @@ export const delUserService = (id)=>{
 
     return request.delete('/user/del',id)
 }
+export const addEvevtService = (id)=>{
+  const params = new URLSearchParams();
+
+      params.append("EvevtId",id);
+
+      return request.post(`/user/AddEvent?${params.toString()}`);
+}

@@ -8,6 +8,8 @@ import UserLayoutView from '@/views/user/userinfo/UserLayout.vue'
 import UserOrderView from '@/views/user/userinfo/UserOrderView.vue';
 import { jwtDecode } from 'jwt-decode';
 import { ElMessage } from 'element-plus';
+import EventView from '@/views/user/userinfo/EventView.vue';
+import MyEventView from '@/views/user/userinfo/MyEventView.vue';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -37,6 +39,8 @@ const router = createRouter({
       children: [
         { path: 'personal-info', component: UserInfoView },
         { path: 'mybooth', component: UserOrderView },
+        { path: 'event', component: EventView },
+        { path: 'myevent', component: MyEventView },
       ]
     },
 
