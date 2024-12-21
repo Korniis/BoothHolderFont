@@ -27,6 +27,10 @@ export const TypeGetService = ()=>{
   return request.get("BrandType/get")
 
 }
+export const CoiGetService = ()=>{
+  return request.get("Booth/CalculateRoi")
+
+}
 export const delboothService = (id)=>{
     const params = new URLSearchParams();
 
